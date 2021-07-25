@@ -21,7 +21,6 @@ class ContactsComponent extends Component {
 
   render() {
     const contacts = this.state.contacts;
-    console.log(contacts);
     return (
       <div className="contact-container">
         <center>

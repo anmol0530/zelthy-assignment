@@ -10,7 +10,6 @@ class EditContact extends Component {
       phone: this.props.contact.phone,
       website: this.props.contact.website,
     };
-    console.log(props);
   }
 
   onChange = (e) => {
