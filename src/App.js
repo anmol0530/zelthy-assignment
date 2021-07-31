@@ -25,7 +25,6 @@ class App extends Component {
         {!this.state.fetching && (
           <ContactsComponent
             contacts={this.state.contacts}
-            fetching={this.state.fetching}
           />
         )}
       </div>

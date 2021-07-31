@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/contactsComponent.scss";
 import {
   emailIcon,
@@ -11,8 +11,8 @@ import {
 } from "../images";
 import EditContact from "./editComponent";
 
-const ContactComponent = ({ contact, onDelete }) => {
-  const [filled, setFilled] = useState(false);
+const ContactComponent = ({ contact, onDelete, handleSubmit, refresh }) => {
+  const [filled, setFilled] = useState(JSON.parse(localStorage.getItem(`filled-${contact.id}`)));
   const [edit, setEdit] = useState(false);
   const [name, setName] = useState(contact.name);
   const [email, setEmail] = useState(contact.email);
@@ -25,6 +25,7 @@ const ContactComponent = ({ contact, onDelete }) => {
     setPhone(data.phone);
     setWebsite(data.website);
     setEdit(false);
+    handleSubmit(data, contact.id); 
   };
 
   const onCancel = () => {
@@ -41,6 +42,16 @@ const ContactComponent = ({ contact, onDelete }) => {
     phone: phone,
     website: website,
   };
+
+  useEffect(() => {
+    if (refresh) {
+      setFilled(false);
+    }
+  },[refresh])
+
+  useEffect(() => {
+    localStorage.setItem(`filled-${contact.id}`, filled);
+  }, [filled])
 
   return (
     <div className="contact">
